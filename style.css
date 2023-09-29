@@ -1,0 +1,25 @@
+.nav-link{
+    position: relative;
+    text-decoration: none;
+}
+
+.initial-underline::after{
+    content: '';
+    opacity: 1;
+    height: 2px;
+    width: 100%;
+    background-color: greenyellow;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: all 0.2s;
+}
+
+.nav-link:hover::after{
+    opacity: 1;
+}
+
+.profile-dropdown .btn {
+    background-color: transparent !important;
+    border: none !important;
+}
