@@ -1,5 +1,6 @@
 $('#example').DataTable( {
     language: {
+        search: "Tìm kiếm",
         paginate: {
             previous: 'Trang trước',
             next:     'Trang kế'
