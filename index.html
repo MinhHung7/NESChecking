@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
-        rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
-        crossorigin="anonymous">
-    
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<body>
 
+<body>
     <section>
         <div class="container mt-5 pt-5">
             <div class="row">
@@ -20,19 +17,69 @@
                     <div class="card">
                         <div class="card-body">
                             <h1 class="card-title text-center">LOGIN</h1>
-                            <form action="">
-                                <input type = "text" name = "" id ="" class = "form-control my-4 py-2" placeholder = "Username" />
-                                <input type="text" name="" id="" class="form-control my-4 py-2" placeholder="Password" />
+                            <form id="loginForm">
+                                <input type="text" name="username" id="username" class="form-control my-4 py-2"
+                                    placeholder="Username" />
+                                <input type="password" name="password" id="password" class="form-control my-4 py-2"
+                                    placeholder="Password" />
                                 <div class="text-center mt-3">
-                                    <button style="width: 80%; height: 40px;"class = "btn btn-primary m-auto">Login</button>
+                                    <button type="submit" style="width: 80%; height: 40px;"
+                                        class="btn btn-primary m-auto">Login</button>
                                 </div>
                             </form>
+                            <div id="usernameDisplay" class="mt-3 text-center"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    
+    <script>
+
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            // Get the values entered by the user
+            const enteredUsername = document.getElementById('username').value;
+            const enteredPassword = document.getElementById('password').value;
+
+            // Define the URL to which you want to send the POST request
+            const url = 'http://14.225.254.74:1338/api/auth/local'
+
+            // Define the data you want to send as the request body (usually in JSON format)
+            const data = {
+                "identifier": enteredUsername,
+                "password": enteredPassword
+            };
+
+            // Create an object to configure the request
+            const requestOptions = {
+                method: 'POST', // Specify the HTTP method
+                headers: {
+                    'Content-Type': 'application/json' // Set the content type to JSON
+                },
+                body: JSON.stringify(data) // Convert the data to a JSON string
+            };
+
+            // Make the POST request using fetch
+            fetch(url, requestOptions)
+                .then(async (res) => {
+                    const data = await res.json();
+                    if (res.ok) {
+                        console.log("goi request thanh cong!");
+                        console.log(data?.jwt);
+                        localStorage.setItem('jwt', data.jwt);
+                        window.location.href = "/history.html";
+                    }
+                    else {
+                        console.log("goi request that bai!");
+                        console.log(data);
+                    }
+                })
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -41,4 +88,5 @@
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
