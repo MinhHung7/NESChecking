@@ -89,48 +89,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>22120123</td>
-                    <td>9:12</td>
-                    <td>NES</td>
-                    <td>Nguyễn Minh Hưng</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>22120123</td>
-                    <td>9:12</td>
-                    <td>NES</td>
-                    <td>Nguyễn Minh Hưng</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>22120123</td>
-                    <td>9:12</td>
-                    <td>NES</td>
-                    <td>Nguyễn Minh Hưng</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>22120123</td>
-                    <td>9:12</td>
-                    <td>NES</td>
-                    <td>Nguyễn Minh Hưng</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>22120123</td>
-                    <td>9:12</td>
-                    <td>NES</td>
-                    <td>Nguyễn Minh Hưng</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>22120123</td>
-                    <td>9:12</td>
-                    <td>NES</td>
-                    <td>Nguyễn Minh Hưng</td>
-                </tr>
+                
             </tbody>
             <tfoot>
                 <tr>
@@ -176,13 +135,28 @@
                 const data = await res.json();
                 if (res.ok) {
                     console.log("goi request thanh cong!");
-                    console.log(data);
+                    var table = $('#example').DataTable();
+                    console.log(data)
+
+                    for (let i = 0; i < data['data'].length; i++) {
+                        const date = new Date(data['data'][i].attributes.createdAt);
+                        const formattedTime = date.toLocaleString('en-US', {hour12: true});
+
+                        table.row.add([
+                            i + 1,
+                            data['data'][i].attributes.uid,
+                            formattedTime,
+                            data['data'][i].attributes.device.node_id,
+                            data['data'][i].attributes.person == null ? `<a href = "#" style = "color: red; text-decoration: none;"> Thêm thành viên </a>` : `<a href = "#" style= "text-decoration: none;">${data['data'][i].attributes.person.name}</a>`,
+                        ]).draw();
+                    }
                 }
                 else {
                     console.log("goi request that bai!");
                     console.log(data);
                 }
             })
+
     </script>
 
 </body>
