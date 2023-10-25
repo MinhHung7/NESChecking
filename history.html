@@ -136,11 +136,11 @@
                 if (res.ok) {
                     console.log("goi request thanh cong!");
                     var table = $('#example').DataTable();
-                    console.log(data)
+                    console.log(data['data'][1].attributes.time)
 
                     for (let i = 0; i < data['data'].length; i++) {
                         const date = new Date(data['data'][i].attributes.createdAt);
-                        const formattedTime = date.toLocaleString('en-US', {hour12: true});
+                        const formattedTime = date.toLocaleString('en-US', {hour24: true});
 
                         table.row.add([
                             i + 1,
