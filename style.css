@@ -1,0 +1,90 @@
+/* .nav-link{
+    position: relative;
+    text-decoration: none;
+} */
+
+.nav-link:hover::after{
+    opacity: 1;
+}
+
+.profile-dropdown .btn {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+/* CSS for the single underline hover effect */
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-link {
+    position: relative;
+    text-decoration: none;
+    /* Remove default underline */
+    padding-bottom: 2px;
+    /* Ensure space for the underline */
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    /* Adjust the height of the underline as needed */
+    bottom: 0;
+    left: 0;
+    background-color: #007BFF;
+    /* Change to your desired underline color */
+    transition: width 0.3s ease-in-out;
+    /* Adjust the duration and timing function as needed */
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* CSS to highlight "Lịch sử quét thẻ" on a black background */
+.active-link {
+    position: relative;
+    text-decoration: none;
+    /* Remove default underline */
+    padding-bottom: 2px;
+    /* Ensure space for the underline */
+    color: #007BFF;
+    /* Change text color to the desired highlight color */
+}
+
+.active-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    /* Adjust the height of the underline as needed */
+    bottom: 0;
+    left: 0;
+    background-color: #007BFF;
+    /* Underline color */
+    transition: width 0.3s ease-in-out;
+    /* Adjust the duration and timing function as needed */
+}
+
+.active-link:hover::after {
+    width: 100%;
+    background-color: #007BFF;
+    /* Highlight the underline when hovered */
+}
+
+#errorDisplay {
+    display: none;
+    /* Initially hidden */
+    margin-top: 5px;
+    /* Space between password input and error message */
+}
+
+.error-border {
+    border: 1px solid red;
+}
