@@ -1,4 +1,4 @@
-$('#example').DataTable( {
+$('#example').DataTable({
     language: {
         search: "Tìm kiếm",
         paginate: {
