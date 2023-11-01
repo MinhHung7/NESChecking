@@ -1,44 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Person Information</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .board {
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
+
 <body>
-    <script>
-        // Define the URL to which you want to send the POST request
-            const url = 'http://14.225.254.74:1338/api/auth/local'
-
-            // Define the data you want to send as the request body (usually in JSON format)
-            const data = {
-                "identifier" : "nesclub",
-                "password" : "12345678"
-            };
-
-            // Create an object to configure the request
-            const requestOptions = {
-                method: 'POST', // Specify the HTTP method
-                headers: {
-                    'Content-Type': 'application/json' // Set the content type to JSON
-                },
-                body: JSON.stringify(data) // Convert the data to a JSON string
-            };
-
-            // Make the POST request using fetch
-            fetch(url, requestOptions)
-                .then(async (res) => {
-                    const data = await res.json();
-                    if (res.ok) {
-                        console.log("goi request thanh cong!");
-                        console.log(data);
-                    }
-                    else {
-                        console.log("goi request that bai!");
-                        console.log(data);
-                    }
-                })
-
-    </script>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="board">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Left side: Person's information -->
+                            <h1>Person Information</h1>
+                            <p><strong>Name:</strong> Nguyễn Minh Hưng</p>
+                            <p><strong>UID:</strong> TEST</p>
+                            <p><strong>ID:</strong> 2</p>
+                            <p><strong>CreatedAt:</strong> 2023-10-05T05:10:03.305Z</p>
+                            <p><strong>updatedAt:</strong> 2023-10-27T06:35:31.409Z</p>
+                            <!-- Add more information as needed -->
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Right side: Avatar -->
+                            <h2>Avatar</h2>
+                            <img src="https://m.media-amazon.com/images/S/pv-target-images/ae4816cade1a5b7f29787d0b89610132c72c7747041481c6619b9cc3302c0101.jpg" alt="Avatar" class="img-fluid">
+                            <!-- Replace the URL with the actual person's avatar URL -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <!-- Edit button -->
+                <button class="btn btn-primary">Sửa</button>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
