@@ -88,3 +88,32 @@
 .error-border {
     border: 1px solid red;
 }
+
+/* CSS for styling the board */
+.board {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 400px;
+}
+
+/* CSS for styling the left part (person's information) */
+.left-part {
+    flex: 1;
+    padding: 10px;
+}
+
+/* CSS for styling the right part (person's avatar) */
+.right-part {
+    flex: 1;
+    text-align: center;
+}
+
+/* CSS for styling the avatar image */
+.avatar {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
