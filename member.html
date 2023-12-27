@@ -23,6 +23,21 @@
             margin: 0 auto;
         }
     </style>
+    <style>
+        /* Center the form */
+        #dynamicForm {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            width: 500px;
+            /* Adjust the z-index as needed */
+        }
+    </style>
 
 </head>
 
@@ -75,13 +90,12 @@
                         <input type="file" id="avatar-upload" style="display: none;">
                     </li>
                     <li><a class="dropdown-item" href="#">Chỉnh sửa thông tin</a></li>
+                    <li><a class="dropdown-item" href="#" id="logout">Đăng xuất</a></li>
                 
                 </ul>
             </div>
     
         </div>
-    
-    
     
     </nav>
 
@@ -95,8 +109,8 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <!-- Edit button -->
-                <button class="btn btn-primary" style="width: 150px; margin-top: 10px;">Sửa</button>
-                <button class="btn btn-primary" style="width: 150px; margin-top: 10px;">Xóa</button>
+                <button id="editButton" class="btn btn-primary" style="width: 150px; margin-top: 10px;">Sửa</button>
+                <button id="eraseButton" class="btn btn-primary" style="width: 150px; margin-top: 10px;">Xóa</button>
             </div>
         </div>
     </div>
@@ -109,97 +123,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
         crossorigin="anonymous"></script>
-    <script>
-        document.getElementById('logout').addEventListener('click', function (event) {
-            event.preventDefault(); // Prevent the default link behavior (navigating to the href)
-
-            // Your custom code here, for example:
-            localStorage.removeItem('jwt');
-            window.location.href = "/index.html";
-            console.logout(localStorage);
-        });
-    </script>
-
-    <script>
-        const storedJwtToken = localStorage.getItem('jwt');
-        console.log(storedJwtToken);
-
-        // Define the URL to which you want to send the POST request
-        // const page = 1;
-        const url = `http://14.225.254.74:1338/api/people/2?populate[avatar]=true`;
-
-
-        // Create an object to configure the request
-        const requestOptions = {
-            method: 'GET', // Specify the HTTP method
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${storedJwtToken}`
-            },
-        };
-
-        // Make the GET request using fetch
-        fetch(url, requestOptions)
-            .then(async (res) => {
-                const data = await res.json();
-                if (res.ok) {
-                    console.log("goi request thanh cong!");
-                    
-                    // Parse the query string to get the parameters
-                    const searchParams = new URLSearchParams(window.location.search);
-
-                    if (searchParams.has('id')) {
-                        let id = searchParams.get('id');
-                        // lam gi do voi id
-                        console.log(id);
-
-                        // JavaScript to populate the person's information and avatar
-                        const infoPart = document.getElementById('infoPart');
-                        const avatarPart = document.getElementById('avatarPart');
-
-                        const createdAtDate = new Date(data['data'].attributes.createdAt);
-                        const formattedTimeCreatedAt = createdAtDate.toLocaleString('en-US', { hour24: true });
-                        const updatedAtDate = new Date(data['data'].attributes.updatedAt);
-                        const formattedTimeUpdatedAt = updatedAtDate.toLocaleString('en-US', { hour24: true });
-                        // Example person's information
-
-                        const personInfo = {
-                            "Họ và tên": data['data'].attributes.name,
-                            "Mã UID": data['data'].attributes.uid,
-                            "MSSV": data['data'].attributes.sid,
-                            "Thời gian tạo" : formattedTimeCreatedAt,
-                            "Thời gian cập nhật": formattedTimeUpdatedAt,
-                        };
-
-                        // Create and append elements to the left part (information)
-                        for (const key in personInfo) {
-                            const p = document.createElement('p');
-                            const strong = document.createElement('strong'); // Create a <strong> element
-                            strong.textContent = key; // Set the strong element's text content to the key (bold)
-                            p.appendChild(strong); // Append the strong element to the <p> element
-                            p.innerHTML += `: ${personInfo[key]}`; // Append the value part after the strong element
-                            infoPart.appendChild(p);
-                        }
-
-                        // Create and append the avatar image to the right part
-                        const avatar = document.createElement('img');
-                        avatar.src = data['data'].attributes.avatar.data.attributes.formats.thumbnail.url; // Replace with the actual path to the avatar image
-                        avatar.alt = 'Avatar'; // You can set an appropriate alt text
-                        avatar.style.width = '200px';
-                        avatar.style.height = '200px';
-                        avatar.style.objectFit = 'cover';
-                        avatarPart.appendChild(avatar)
-                    }
-                }
-                else {
-                    console.log("goi request that bai!");
-                    console.log(data);
-                }
-
-            });
-
-    </script>
-
+    
+    <script src="./member.js"></script>
 
 </body>
 
